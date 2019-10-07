@@ -2,7 +2,6 @@ import deck
 import random
 import os
 import platform
-import copy
 from player import PlayerClass
 
 def clear_screen():
@@ -23,6 +22,8 @@ def main():
         try:
             player_ct = input("How many players would like to play (1-4): ")
             player_ct = int(player_ct)
+            if (player_ct < 1 or player_ct > 4):
+                continue
             for player in range(player_ct):
                 players.append(PlayerClass(player + 1))
             break
@@ -32,13 +33,11 @@ def main():
             print "Please enter a valid integer, or any character to exit."
             flag = True
     
-    # First create deck for the game
+    # First create & shuffle deck for the game
     deck_cls = deck.DeckClass()
-    game_deck = deck_cls.create_deck()
-    shuffled_deck = copy.deepcopy(game_deck)
+    shuffled_deck = deck_cls.create_deck()
 
     random.shuffle(shuffled_deck)
-    print(shuffled_deck)
 
     # Start game
     while (True):
@@ -67,12 +66,12 @@ def main():
         for _ in range(2):
             dealt_card = shuffled_deck.pop()
             dealer.add_card(dealt_card)
-        print("The dealer's face up card is: %s" % dealer.get_last_card().to_string())
 
         # Loop on hit or not
         for player in players:
             flag = False
             player_no = player.get_player_no()
+            print("The dealer's face up card is: %s" % dealer.get_last_card().to_string())
             while (True):
                 aces = player.filter_aces()
                 if (len(aces) > 0):
@@ -131,6 +130,7 @@ def main():
         play_again = raw_input("If you'd like to play again, type 'yes': ")
         if (play_again != "yes"):
             return
+        clear_screen()
         # Towards the end, check if a new deck is necessary
 
 if __name__ == "__main__":

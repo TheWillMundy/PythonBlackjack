@@ -1,6 +1,5 @@
 class PlayerClass:
     def __init__(self, player_no):
-        print "Person created"
         self.cards = []
         self.no = player_no
         self.busted = False
@@ -29,9 +28,6 @@ class PlayerClass:
     def get_player_no(self):
         return self.no
     
-    def initial_deal(self):
-        new_cards = []
-    
     def has_aces(self):
         if (len(filter(lambda card : card.is_ace(), self.get_cards())) > 0):
             return True
@@ -40,7 +36,4 @@ class PlayerClass:
     
     def filter_aces(self):
         return filter(lambda card : card.is_ace(), self.get_cards())
-    
-    def to_string(self):
-        print("")
         
