@@ -37,6 +37,28 @@ class Test(TestCase):
         ace_card.switch_ace_value()
         self.assertEqual(ace_card.get_value(), 1)
     
+    def test_player_card_value(self):
+        print("Should return the correct total card value.")
+        new_player = player.PlayerClass(1)
+        card_1 = card.CardClass("Hearts", 10, "King")
+        card_2 = card.CardClass("Spades", 9, str(9))
+        new_player.add_card(card_1)
+        new_player.add_card(card_2)
+        card_total_value = card_1.get_value() + card_2.get_value()
+        self.assertEqual(new_player.get_total_value(), card_total_value)
+
+    def test_busted_player(self):
+        print("Should indicate player is busted with total card value above 21")
+        new_player = player.PlayerClass(1)
+        card_1 = card.CardClass("Hearts", 10, "King")
+        card_2 = card.CardClass("Spades", 10, "Queen")
+        new_player.add_card(card_1)
+        new_player.add_card(card_2)
+        self.assertFalse(new_player.check_busted())
+        card_3 = card.CardClass("Diamonds", 3, str(3))
+        new_player.add_card(card_3)
+        self.assertTrue(new_player.check_busted())
+        
     def test_reset_player(self):
         print("Should reset player data except player number.")
         new_player = player.PlayerClass(1)
