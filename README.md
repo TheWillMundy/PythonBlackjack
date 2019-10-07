@@ -11,7 +11,7 @@ Once all the players have gone, it will be the dealer's turn. Their facedown car
 Finally, there will be a prompt to play again or not. To play again, type "yes". Otherwise, type "no" or press return.
 
 # Design Decisions
-The `main.py` file contains the main game logic, handling the main flow of the game as well as any edge flows that might arise (ex: when the player receives aces, or the player types in a character other than the accepted responses for an input). The `main.py` file uses three files, `card.py`, `deck.py`, and `player.py` to modularize its structure. 
+The `main.py` file contains the main game logic, handling the main flow of the game as well as any edge flows that might arise (ex: when the player receives aces, or the player types in a character other than the accepted responses for an input). The `main.py` file uses three files, `card.py`, `deck.py`, and `player.py` to modularize its structure. It also employs several helper methods to break down the game into its component sections for clarity.
 
 The `card.py` file contains a `CardClass` which the `deck.py` file uses to instantiate new cards in the deck object's `create_deck` method. Each card has a suit, numeric value, and "name", where the name allows for face cards and aces to be identified. Additionally, the card class has two helper methods to handle the ace edge case (one to check whether the card is an ace, the other to toggle the value between 1 and 11 depending on the user's choice). All cards that are aces have an initial value of 1. Cards also have a `to_string` method which prints their name and suit. 
 
@@ -32,4 +32,4 @@ This was used in order to shuffle the deck, using its shuffle method.
 `platform` was used to check the system platform, and then depending on the system (Windows or Linux/OSX) the `clear_screen` method could use the correct system call to clear the screen using the `os` module.
 
 ### Testing library
-`unittest` was used so that 
+`unittest` was used in order to test the different classes created, as `unittest` allows for mocking and assertions.
