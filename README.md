@@ -10,6 +10,9 @@ Once all the players have gone, it will be the dealer's turn. Their facedown car
 
 Finally, there will be a prompt to play again or not. To play again, type "yes". Otherwise, type "no" or press return.
 
+## Testing Instructions
+In order to run the provided tests, simply run `python test.py` and the tests will run.
+
 # Design Decisions
 The `main.py` file contains the main game logic, handling the main flow of the game as well as any edge flows that might arise (ex: when the player receives aces, or the player types in a character other than the accepted responses for an input). The `main.py` file uses three files, `card.py`, `deck.py`, and `player.py` to modularize its structure. It also employs several helper methods to break down the game into its component sections for clarity.
 
@@ -24,12 +27,15 @@ The `player.py` file contains a `PlayerClass` which can be instantiated to creat
 ## Language: Python
 I chose to use Python since it is very easy to create a terminal application with it, and the ability to hide previous text (through the terminal clear screen command) allows for each player to only view their own cards. Additionally, Python's ability to create classes allowed for a high degree of modularization between the different structures involved. Similarly, the ability to easily import modules allowed for the deck class to use the card class, as well as the main driver to use the card, deck, and player classes. Additionally, since we used Python we employed snake case for almost all of the program except for classes.
 
+## Test Runner: Unittest
+This library was used because it is very powerful for unit testing, which was essential for this application given the modular classes. With this library, determining whether methods and certain logic was working on each class (card, deck, player) was a breeze. Additionally, the syntax for each test is very clear to understand with the `unittest` library, so a non-technical user could read the tests and still have a good grasp of what is going on.
+
 ## Additional Libraries
 ### random
-This was used in order to shuffle the deck, using its shuffle method.
+This was used in order to shuffle the deck, using its shuffle method. Since the provided shuffle method was so powerful and simple, it made sense to use it rather than handcraft a shuffle method from scratch.
 
 ### os & platform
-`platform` was used to check the system platform, and then depending on the system (Windows or Linux/OSX) the `clear_screen` method could use the correct system call to clear the screen using the `os` module.
+`platform` was used to check the system platform, and then depending on the system (Windows or Linux/OSX) the `clear_screen` method could use the correct system call ('cls' for Windows and 'clear' for Unix) to clear the screen using the `os` module. 
 
-### Testing library
-`unittest` was used in order to test the different classes created, as `unittest` allows for mocking and assertions.
+### unittest (testing library)
+`unittest` was used in order to test the different classes created, as `unittest` allows for flexible and easy to use assertions. 
